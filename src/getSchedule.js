@@ -1,14 +1,16 @@
 const { species } = require('../data/zoo_data');
+const { hours } = require('../data/zoo_data');
+
 const data = require('../data/zoo_data');
 
 const weekDays = Object.keys(data.hours);
-const animals = data.species.map(({ name }) => name);
+const animals = species.map(({ name }) => name);
 
 function showAllDay(userDay) {
   const schedule = {};
   weekDays.forEach((day) => {
     schedule[day] = {};
-    schedule[day].officeHour = `Open from ${data.hours[day].open}am until ${data.hours[day].close}pm`;
+    schedule[day].officeHour = `Open from ${hours[day].open}am until ${hours[day].close}pm`;
     schedule[day].exhibition = data.species.filter((specie) =>
       specie.availability.includes(day)).map((animalName) => animalName.name);
     if (day === 'Monday') {
@@ -22,7 +24,7 @@ function showAllDay(userDay) {
 }
 
 function showAnimalsPerWeekDay(userAnimal) {
-  return data.species.find((specie) =>
+  return species.find((specie) =>
     specie.name === userAnimal).availability;
 }
 
